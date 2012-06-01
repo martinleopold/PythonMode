@@ -19,11 +19,11 @@ public class PythonMode extends JavaMode {
 
     public PythonMode(Base base, File folder) {
         super(base, folder);
-	
+
 	// hack: make jython load stuff now instead of first compile
-	//new PythonInterpreter(); 
+	//new PythonInterpreter();
 	PythonInterpreter.initialize(System.getProperties(), new Properties(), new String[] {});
-	
+
 	// load tempate
 	try {
 	    File templateFile = new File(getContentFile("template.py").getAbsolutePath());
@@ -54,7 +54,7 @@ public class PythonMode extends JavaMode {
 
         //System.out.println("building");
         PythonBuild build = new PythonBuild(sketch);
-        String appletClassName = build.build();
+        String appletClassName = build.build(false);
         if (appletClassName != null) {
             final Runner runtime = new Runner(build, listener);
             new Thread(new Runnable() {
@@ -68,7 +68,7 @@ public class PythonMode extends JavaMode {
         }
         return null;
     }
-    
+
     @Override
     public Editor createEditor(Base base, String path, EditorState state) {
         Editor editor = super.createEditor(base, path, state);

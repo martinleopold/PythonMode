@@ -22,14 +22,14 @@ public class PythonBuild extends JavaBuild {
     public PythonBuild(Sketch sketch) {
         super(sketch);
     }
-    
+
     /*
      * better?: write sketch code to a .py file and have the .java read it
-     * 
-     * 
+     *
+     *
      */
     @Override
-    public String build(File srcFolder, File binFolder) throws SketchException {
+    public String build(File srcFolder, File binFolder, boolean sizeWarning) throws SketchException {
         this.srcFolder = srcFolder;
         this.binFolder = binFolder;
 
@@ -75,7 +75,7 @@ public class PythonBuild extends JavaBuild {
 
         // regular classpath
         String javaClassPath = System.getProperty("java.class.path");
-        
+
         // Remove quotes if any.. A messy (and frequent) Windows problem
         if (javaClassPath.startsWith("\"") && javaClassPath.endsWith("\"")) {
             javaClassPath = javaClassPath.substring(1, javaClassPath.length() - 1);
