@@ -34,7 +34,7 @@ public class PythonBuild extends JavaBuild {
         this.binFolder = binFolder;
 
         // escape all newlines to make single line string
-        String pyCode = sketch.getMainProgram().replaceAll("\n", "\\\\n"); // \\n (will be inserted into a string literal)
+        String pyCode = sketch.getMainProgram().replaceAll("\n", "\\\\n").replaceAll("\r", ""); // \\n (will be inserted into a string literal)
         //System.out.println(pyCode);
 
         String code = "import org.python.util.PythonInterpreter; public class " + sketch.getName() + " { public static void main(String[] args) { PythonInterpreter py = new PythonInterpreter(); py.exec(\"" + pyCode + "\"); } }";
